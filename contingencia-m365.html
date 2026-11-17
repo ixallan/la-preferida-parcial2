@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="es"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Contingencia ante caída de Microsoft 365 – La Preferida</title>
+<style>
+:root{--bg:#f4f6fa;--card:#fff;--tx:#14213d;--mu:#5b6578;--bd:#d9dee8;--nv:#14213d;--g:#2e9e5b;--y:#e8b923;--o:#e8791f;--r:#c8312b;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0e1420;--card:#18202f;--tx:#e8ecf4;--mu:#9aa5ba;--bd:#2c3649;--nv:#7fa6ff}}
+*{box-sizing:border-box}html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--tx);font:15px/1.5 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+.w{max-width:1100px;margin:0 auto;padding:16px}
+h1{font-size:22px;margin:0 0 4px}h2{font-size:17px;margin:0 0 10px}h3{font-size:15px;margin:0 0 6px}
+.sub,.ft{color:var(--mu);font-size:13px}.sub{margin:0 0 14px}
+.card{background:var(--card);border:1px solid var(--bd);border-radius:12px;padding:14px;margin-bottom:14px}
+.kp{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:10px;margin-bottom:14px}
+.kp>div{background:var(--card);border:1px solid var(--bd);border-radius:10px;padding:10px;border-top:4px solid var(--bd)}
+.kp b{display:block;font-size:20px}.kp span{font-size:12px;color:var(--mu)}
+#tm{font:700 34px/1.1 ui-monospace,Menlo,Consolas,monospace;letter-spacing:.03em}
+.bar{height:8px;background:var(--bd);border-radius:6px;overflow:hidden;margin-top:6px}.bar i{display:block;height:100%;background:var(--g);width:0;transition:width .3s}
+button{background:var(--nv);color:var(--bg);border:0;border-radius:8px;padding:7px 12px;cursor:pointer;font:inherit;font-size:13px;margin:2px 4px 2px 0}
+button.s{background:transparent;color:var(--tx);border:1px solid var(--bd)}button.on{background:var(--nv);color:var(--bg)}
+.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.ph{border-left:6px solid var(--bd)}
+.t{display:flex;gap:10px;align-items:flex-start;padding:7px 0;border-bottom:1px solid var(--bd)}.t:last-child{border:0}
+.t input{margin-top:4px;width:18px;height:18px;flex:none}.t.d span.x{text-decoration:line-through;color:var(--mu)}
+.tag{font-size:11px;border:1px solid var(--bd);border-radius:20px;padding:0 8px;color:var(--mu);margin-left:4px;white-space:nowrap}
+.g2{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px}
+input[type=text],select,textarea{width:100%;font:inherit;font-size:14px;padding:7px 9px;border:1px solid var(--bd);border-radius:8px;background:var(--bg);color:var(--tx);margin-bottom:6px}
+textarea{min-height:110px;resize:vertical}
+.lg{border-bottom:1px solid var(--bd);padding:6px 0;font-size:14px}.lg small{color:var(--mu)}
+.al{border:1px solid var(--o);border-left-width:6px;border-radius:8px;padding:8px 10px;margin:6px 0;font-size:14px}
+.al.ok{border-color:var(--g)}.al.bad{border-color:var(--r)}
+</style></head><body><div class="w">
+<div style="margin-bottom:14px;"><a href="index.html" style="color:var(--nv);text-decoration:none;font-weight:600;font-size:13px;display:inline-flex;align-items:center;gap:6px;padding:4px 8px;border-radius:6px;background:var(--card);border:1px solid var(--bd);">← Volver al Portal de Entregables</a></div>
+<h1>Contingencia ante caída total de Microsoft 365</h1>
+<p class="sub">Supermercados La Preferida, S. A. · Caso CI-CS-2026-02 · Producto 2 · Caída atribuible al fabricante · 14 sucursales (7:00 a. m.–10:00 p. m.; 2 abiertas 24 h), 2 CEDIS (Tocumen y Transístmica), Sede Central en Calidonia, 2 800 colaboradores.</p>
+
+<div class="kp">
+<div style="border-top-color:var(--r)"><span>Cronómetro del incidente</span><div id="tm">00:00:00</div>
+<button onclick="go()" id="bg">Iniciar</button><button class="s" onclick="pa()">Pausar</button><button class="s" onclick="rs()">Reiniciar</button></div>
+<div style="border-top-color:var(--r)"><span>Microsoft 365</span><b style="color:var(--r)">Caído</b><span>Exchange, Teams, documentos y flujos de aprobación detenidos</span></div>
+<div style="border-top-color:var(--g)"><span>Cajas POS sucursales</span><b style="color:var(--g)">Operativo local</b><span>Servidores POS locales; sincronizan cada 15 min</span></div>
+<div id="kc" style="border-top-color:var(--y)"></div>
+<div style="border-top-color:var(--nv)"><span>Avance del plan</span><b id="pg">0%</b><div class="bar"><i id="pb"></i></div></div>
+</div>
+
+<div class="card"><h2>Estado técnico del incidente</h2><div class="g2">
+<div><h3>Servicios detenidos</h3><span class="ft">Exchange Online (correo), Microsoft Teams, documentos compartidos y flujos digitales de aprobación.</span></div>
+<div><h3>Servicios que siguen operando</h3><span class="ft">Ventas en caja con servidores POS locales. Efectivo con precios en caché; tarjeta depende del enlace con las pasarelas de pago; la actualización central de precios e inventarios queda pausada. Enlace/VPN respaldado por Conecta Istmo (24/7); monitoreo externo de CyberShield LATAM.</span></div></div></div>
+
+<div class="card"><h2>Guía por fases</h2>
+<div class="row" id="rf"></div><div id="ph" style="margin-top:10px"></div></div>
+
+<div class="g2">
+<div class="card"><h2>Bitácora: formularios FAC y eventos</h2>
+<select id="ty"><option value="FAC">Aprobación manual FAC</option><option value="Evento">Evento de bitácora</option></select>
+<input type="text" id="fo" placeholder="N.° de folio (ej. FAC-001)">
+<input type="text" id="ar" placeholder="Área / Sucursal">
+<input type="text" id="co" placeholder="Concepto / Monto (o descripción del evento)">
+<input type="text" id="ap" placeholder="Aprobador / Responsable">
+<button onclick="add()">Registrar</button><span class="ft" id="er"></span>
+<div id="lg" style="margin-top:8px"></div></div>
+<div class="card"><h2>Resumen de cierre para conciliación</h2>
+<textarea id="rs2" readonly></textarea>
+<button onclick="cp()">Copiar resumen</button><span class="ft" id="cm"></span>
+<p class="ft">Cada FAC debe conciliarse en SAP ERP durante la Fase 3. No incluir contraseñas ni datos sensibles en la bitácora.</p></div>
+</div>
+
+<div class="card"><h2>Simulador de escenario: sábado en hora pico (5:00–7:00 p. m.)</h2>
+<div class="row"><button onclick="sim()" id="sb">Simular sábado pico</button><span class="ft">Pico: ≈ 14 % de la facturación diaria, ≈ USD 180 000 en 2 h (USD 1 500/min).</span></div>
+<div id="sm"></div></div>
+<p class="ft">Herramienta de apoyo a la decisión; los datos se mantienen solo en esta ventana del navegador hasta que copies el resumen.</p>
+</div>
+<script>
+const $=id=>document.getElementById(id);
+const RL={ti:"CIO / TI",ge:"Gerencia / Comité de Crisis",su:"Gerentes de Sucursal",co:"Compras / CEDIS"};
+const P=[
+{n:"Fase 1 · Detección y activación (0–15 min)",c:"var(--r)",t:[
+["a1","Confirmar la caída externa en el portal de estado de Microsoft y con Conecta Istmo (descartar falla de enlace/VPN).",["ti"]],
+["a2","Verificar que los servidores POS locales operan en las 14 sucursales (cobro en efectivo y tarjeta).",["ti","su"]],
+["a3","Activar los grupos de WhatsApp predefinidos (Gerencia General, Gerentes de Sucursal, TI, Compras/CEDIS), cada uno con su responsable.",["ge","ti"]],
+["a4","Emitir el comunicado oficial a tiendas: la caja sigue cobrando; no compartir contraseñas ni datos sensibles por WhatsApp.",["ge"]],
+["a5","Notificar a CyberShield LATAM y solicitar vigilancia reforzada durante el incidente.",["ti"]]]},
+{n:"Fase 2 · Operación en contingencia (15 min – restablecimiento)",c:"var(--o)",t:[
+["b1","Habilitar los correos alternos pre-aprobados (proveedor distinto a Microsoft) solo para Gerencia y Compras.",["ge","co"]],
+["b2","Comunicar a proveedores y terceros clave, desde las cuentas alternas, que se usan correos temporales por contingencia.",["co","ge"]],
+["b3","Operar las aprobaciones con Formularios FAC foliados, firmados y registrados en la bitácora.",["ge","su","co"]],
+["b4","Supervisar la operación POS: efectivo con precios en caché y pagos con tarjeta contra las pasarelas.",["su","ti"]],
+["b5","Reforzar la supervisión en las 2 sucursales 24 h durante la noche.",["su"]],
+["b6","CEDIS: coordinar recepciones y despachos con formularios impresos y comunicación por WhatsApp.",["co"]],
+["b7","Vigilar phishing oportunista: avisar que nadie de “soporte de Microsoft” solicitará claves ni enlaces por llamada, WhatsApp o correo.",["ti","ge"]]]},
+{n:"Fase 3 · Recuperación, conciliación y cierre",c:"var(--g)",t:[
+["c1","Verificar la estabilidad de Exchange Online y Teams antes de retirar la contingencia.",["ti"]],
+["c2","Confirmar que se reanudó la actualización central de precios e inventarios.",["ti","su"]],
+["c3","Digitalizar y conciliar en SAP ERP todos los FAC firmados contra la bitácora.",["co","ge"]],
+["c4","Revocar o cerrar las cuentas de correo alternas temporales.",["ti"]],
+["c5","Realizar la reunión de lecciones aprendidas (post-mortem) y documentar acciones de mejora.",["ge","ti"]]]}];
+const all=P.flatMap(p=>p.t);
+const S={done:{},role:"all",logs:[],el:0,st:null,sim:false};
+function fmt(s){const f=n=>String(n).padStart(2,"0");return f(Math.floor(s/3600))+":"+f(Math.floor(s%3600/60))+":"+f(s%60)}
+function cur(){return S.el+(S.st?Math.floor((Date.now()-S.st)/1000):0)}
+setInterval(()=>{$("tm").textContent=fmt(cur());if(S.sim)simr()},500);
+function go(){if(!S.st){S.st=Date.now();$("bg").textContent="En curso"}}
+function pa(){if(S.st){S.el=cur();S.st=null;$("bg").textContent="Reanudar"}}
+function rs(){S.st=null;S.el=0;$("bg").textContent="Iniciar"}
+function draw(){
+$("rf").innerHTML=[["all","Todos"],...Object.entries(RL)].map(([k,v])=>`<button class="${S.role==k?"on":"s"}" onclick="S.role='${k}';draw()">${v}</button>`).join("");
+$("ph").innerHTML=P.map(p=>{const ts=p.t.filter(t=>S.role=="all"||t[2].includes(S.role));const d=p.t.filter(t=>S.done[t[0]]).length;
+return`<div class="card ph" style="border-left-color:${p.c};margin-bottom:10px"><h3>${p.n} <span class="tag">${d}/${p.t.length}</span></h3>`+(ts.map(t=>`<label class="t${S.done[t[0]]?" d":""}"><input type="checkbox" ${S.done[t[0]]?"checked":""} onchange="ck('${t[0]}',this.checked)"><span><span class="x">${t[1]}</span>${t[2].map(r=>`<span class="tag">${RL[r]}</span>`).join("")}</span></label>`).join("")||`<span class="ft">Sin tareas para este rol en esta fase.</span>`)+`</div>`}).join("");
+const n=all.filter(t=>S.done[t[0]]).length,pc=Math.round(n/all.length*100);
+$("pg").textContent=pc+"%";$("pb").style.width=pc+"%";
+const wa=S.done.a3,em=S.done.b1;
+$("kc").innerHTML=`<span>Canal alterno WhatsApp / correos</span><b style="color:${wa?"var(--g)":"var(--y)"}">${wa?"Activo":"Por activar"}</b><span>WhatsApp: ${wa?"activo":"pendiente"} · Correos alternos: ${em?"activos":"pendientes"}</span>`;
+$("kc").style.borderTopColor=wa?"var(--g)":"var(--y)";
+}
+function ck(i,v){S.done[i]=v;if(v)go();draw();sum()}
+function add(){const ty=$("ty").value,fo=$("fo").value.trim(),ar=$("ar").value.trim(),co=$("co").value.trim(),ap=$("ap").value.trim();
+if(!co||(ty=="FAC"&&(!fo||!ar||!ap))){$("er").textContent=ty=="FAC"?" Completa folio, área, concepto y aprobador.":" Escribe la descripción del evento.";return}
+$("er").textContent="";const nf=S.logs.filter(l=>l.ty=="FAC").length+1;
+S.logs.unshift({ty,fo,ar,co,ap,t:new Date().toLocaleTimeString("es-PA"),e:fmt(cur())});
+["fo","ar","co","ap"].forEach(k=>$(k).value="");$("fo").placeholder="N.° de folio (ej. FAC-"+String(nf+1).padStart(3,"0")+")";lg()}
+function lg(){$("lg").innerHTML=S.logs.map(l=>`<div class="lg"><b>${l.ty=="FAC"?"FAC "+esc(l.fo):"Evento"}</b> <small>${l.t} · T+${l.e}</small><br>${esc(l.ar)}${l.ar?" · ":""}${esc(l.co)}${l.ap?" · "+esc(l.ap):""}</div>`).join("")||`<span class="ft">Aún no hay registros.</span>`;sum()}
+function esc(s){return String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]))}
+function sum(){const n=all.filter(t=>S.done[t[0]]).length,f=S.logs.filter(l=>l.ty=="FAC");
+let s=`RESUMEN DE CIERRE – Caída de Microsoft 365 (La Preferida, CI-CS-2026-02)\nTiempo transcurrido: ${fmt(cur())}\nAvance del plan: ${n}/${all.length} tareas (${Math.round(n/all.length*100)}%)\nFAC registrados: ${f.length}\n\n`;
+s+=S.logs.slice().reverse().map(l=>l.ty=="FAC"?`[${l.t}] FAC ${l.fo} | ${l.ar} | ${l.co} | Aprobador: ${l.ap} | Conciliado en SAP: [ ]`:`[${l.t}] EVENTO | ${l.ar?l.ar+" | ":""}${l.co}`).join("\n");
+$("rs2").value=s}
+function cp(){const t=$("rs2");sum();t.select();try{navigator.clipboard.writeText(t.value).then(()=>$("cm").textContent=" Copiado.",()=>{document.execCommand("copy");$("cm").textContent=" Copiado."})}catch(e){document.execCommand("copy");$("cm").textContent=" Copiado."}}
+function sim(){S.sim=!S.sim;$("sb").textContent=S.sim?"Ocultar simulación":"Simular sábado pico";simr()}
+function simr(){if(!S.sim){$("sm").innerHTML="";return}const m=Math.floor(cur()/60),v=Math.min(m,120)*1500;
+$("sm").innerHTML=`<div class="al ok"><b>La caja NO se detiene.</b> Los POS locales cobran con precios en caché aunque el correo y Teams estén caídos. Frenar ventas cuesta USD 1 500/min.</div>
+<div class="al"><b>Ventas protegidas desde el inicio del incidente:</b> ≈ USD ${v.toLocaleString("es-PA")} (${Math.min(m,120)} min de pico) de un total de ≈ USD 180 000 en la ventana de 2 h.</div>
+<div class="al"><b>Sucursales de mayor tráfico:</b> gerentes en piso, supervisor dedicado a cajas y a la pasarela de pagos; escalar por WhatsApp (grupo de Gerentes de Sucursal), no por correo.</div>
+<div class="al"><b>Tarjetas:</b> dependen del enlace con las pasarelas; si falla, TI confirma con Conecta Istmo y se indica a cajas priorizar efectivo y avisar al cliente.</div>
+<div class="al"><b>Sincronización cada 15 min:</b> la actualización central de precios e inventarios está pausada; no cambiar precios ni lanzar promociones durante el pico.</div>
+<div class="al bad"><b>Aprobaciones urgentes</b> (devoluciones grandes, reposición, anulaciones): solo con FAC foliado y registrado; sin aprobaciones por mensajes informales.</div>
+<div class="al bad"><b>Phishing oportunista:</b> el pico aumenta la presión; ignorar mensajes de “soporte de Microsoft” y no compartir claves por WhatsApp.</div>`}
+draw();lg();
+</script></body></html>

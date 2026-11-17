@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="es"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Matriz de Riesgos Tecnológicos – La Preferida</title>
+<style>
+:root{--bg:#f4f6fa;--card:#fff;--tx:#14213d;--mu:#5b6578;--bd:#d9dee8;--nv:#14213d;--g:#2e9e5b;--y:#e8b923;--o:#e8791f;--r:#c8312b;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0e1420;--card:#18202f;--tx:#e8ecf4;--mu:#9aa5ba;--bd:#2c3649;--nv:#7fa6ff}}
+*{box-sizing:border-box}html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--tx);font:15px/1.5 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+.w{max-width:1100px;margin:0 auto;padding:16px}
+h1{font-size:22px;margin:0 0 4px}h2{font-size:17px;margin:0 0 10px}
+.sub{color:var(--mu);font-size:13px;margin:0 0 14px}
+.card{background:var(--card);border:1px solid var(--bd);border-radius:12px;padding:14px;margin-bottom:14px}
+.kp{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin-bottom:14px}
+.kp div{background:var(--card);border:1px solid var(--bd);border-radius:10px;padding:10px}
+.kp b{display:block;font-size:22px}.kp span{font-size:12px;color:var(--mu)}
+.top{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:14px}
+@media(max-width:800px){.top{grid-template-columns:1fr}}
+.hm{display:grid;grid-template-columns:22px repeat(5,1fr);gap:4px;max-width:460px}
+.cell{aspect-ratio:1;border-radius:6px;display:flex;align-items:center;justify-content:center;font-weight:700;color:#fff;cursor:pointer;border:2px solid transparent;font-size:16px}
+.cell.sel{border-color:var(--tx);outline:2px solid var(--card)}
+.ax{font-size:11px;color:var(--mu);display:flex;align-items:center;justify-content:center}
+.lg{display:flex;gap:10px;flex-wrap:wrap;font-size:12px;color:var(--mu);margin-top:8px}
+.lg i{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:4px}
+.ctl{display:flex;gap:10px;align-items:flex-start;padding:8px 0;border-bottom:1px solid var(--bd)}
+.ctl:last-of-type{border:0}.ctl input{margin-top:4px;width:18px;height:18px;flex:none}
+.ctl small{display:block;color:var(--mu);font-size:12px}
+.risk{border-left:6px solid var(--bd)}
+.rh{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-bottom:6px}
+.n{background:var(--nv);color:var(--bg);border-radius:6px;padding:1px 8px;font-weight:700}
+.tag{font-size:12px;border:1px solid var(--bd);border-radius:20px;padding:1px 9px;color:var(--mu)}
+.bd{margin-left:auto;color:#fff;border-radius:6px;padding:2px 10px;font-weight:700;font-size:13px}
+.gr{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:10px;margin-top:8px;font-size:13.5px}
+.gr h4{margin:0 0 2px;font-size:12px;text-transform:uppercase;color:var(--mu);letter-spacing:.04em}
+.sl{display:flex;gap:10px;flex-wrap:wrap;margin:8px 0}.sl label{font-size:13px;display:flex;gap:6px;align-items:center}
+input[type=range]{width:130px}
+button{background:var(--nv);color:var(--bg);border:0;border-radius:8px;padding:6px 12px;cursor:pointer;font:inherit;font-size:13px}
+.ft{font-size:12px;color:var(--mu)}
+</style></head><body><div class="w">
+<div style="margin-bottom:14px;"><a href="index.html" style="color:var(--nv);text-decoration:none;font-weight:600;font-size:13px;display:inline-flex;align-items:center;gap:6px;padding:4px 8px;border-radius:6px;background:var(--card);border:1px solid var(--bd);">← Volver al Portal de Entregables</a></div>
+<h1>Matriz de Riesgos Tecnológicos Interactiva</h1>
+<p class="sub">Supermercados La Preferida, S. A. · Caso CI-CS-2026-02 · Plataformas críticas: SAP ERP y Microsoft 365 · 14 sucursales, 2 CEDIS, 2 800 colaboradores, ~45 000 transacciones/día (≈ USD 1,26 M/día). Pico sábado 5–7 p. m.: ≈ USD 180 000 (USD 1 500/min).</p>
+<div class="kp" id="kp"></div>
+<div class="top">
+<div class="card"><h2>Mapa de calor 5×5 (riesgo residual)</h2><div id="hm" class="hm"></div>
+<div class="lg"><span><i style="background:var(--g)"></i>Bajo 1–4</span><span><i style="background:var(--y)"></i>Medio 5–9</span><span><i style="background:var(--o)"></i>Alto 10–15</span><span><i style="background:var(--r)"></i>Crítico 16–25</span></div>
+<p class="ft" id="fl">Haz clic en una celda para filtrar el inventario.</p></div>
+<div class="card"><h2>Simulador de controles (“¿y si…?”)</h2><div id="ct"></div>
+<div style="margin-top:8px"><button onclick="reset()">Restablecer todo</button></div>
+<p class="ft" id="cs"></p></div></div>
+<h2>Inventario priorizado y orden de mitigación</h2>
+<div id="ls"></div>
+<p class="ft">Los sliders modifican la probabilidad e impacto inherentes; el nivel residual se recalcula al activar controles. Las reducciones por control son supuestos de consultoría y deben validarse con la Junta.</p>
+</div>
+<script>
+const C=[
+{k:"c1",n:"Separar Veeam del dominio AD + inmutabilidad en Azure",d:"Repositorios fuera de AD, copias inmutables (WORM)."},
+{k:"c2",n:"Habilitar MFA universal en Microsoft Entra ID",d:"Los 2 800 colaboradores, no solo TI y Alta Dirección."},
+{k:"c3",n:"Implementar PAM / acceso Just-In-Time (JIT)",d:"Fin de accesos permanentes de RetailSoft, aprobación y rotación por sesión."},
+{k:"c4",n:"Contratar SOC 24/7",d:"+USD 6 500/mes (+USD 78 000/año) sobre el 8×5 actual de USD 4 500/mes."},
+{k:"c5",n:"SIEM + plan de respuesta a incidentes + evidencia forense",d:"Correlación de logs, autoridad pre-aprobada para aislar, cadena de custodia."},
+{k:"c6",n:"Canales alternos formales para continuidad de M365",d:"Canal y flujo de aprobaciones fuera de M365."},
+{k:"c7",n:"Pruebas de restauración integral + RTO/RPO aprobados",d:"Prueba simultánea SAP + AD + M365, objetivos aprobados por la Junta."}];
+const R=[
+{pl:"Infraestructura",e:"Ransomware cifra SAP/VMware y destruye los respaldos Veeam unidos al dominio y las copias de Azure sin inmutabilidad.",h:"Repositorios Veeam en AD; Azure sin inmutabilidad.",p:4,i:5,m:"Sacar Veeam del dominio, repositorio endurecido, copias inmutables en Azure y copia aislada (regla 3-2-1-1).",j:"Sin respaldo íntegro, la recuperación puede tomar días: a USD 1,26 M/día de ventas, el costo supera con creces la inversión.",c:{c1:[1,2],c7:[0,1],c4:[0,1]}},
+{pl:"Microsoft 365",e:"Phishing o robo de credenciales de un colaborador (repetición del caso de Compras, nov. 2025) y fraude de correo (BEC).",h:"MFA solo para TI y Alta Dirección; antecedente de phishing.",p:5,i:4,m:"MFA universal en Entra ID con acceso condicional, bloqueo de autenticación heredada y capacitación anti-phishing.",j:"Control de bajo costo que corta la vía de entrada más probable; evita pagos fraudulentos y acceso a Exchange Online.",c:{c2:[3,1],c4:[0,1]}},
+{pl:"SAP ERP",e:"Uso indebido o compromiso de las cuentas privilegiadas permanentes de RetailSoft, incluido administrador de dominio.",h:"Accesos permanentes sin autorización por sesión, rotación de claves ni PAM/JIT.",p:4,i:5,m:"Retirar admin de dominio a terceros, desplegar PAM/JIT con aprobación y grabación de sesiones, rotar claves.",j:"Un tercero con control total es un único punto de falla sobre ERP y dominio; la mitigación es contractual y técnica.",c:{c3:[2,1],c4:[0,1]}},
+{pl:"Identidad compartida",e:"Fuerza bruta contra el administrador de dominio con detección tardía (caso del 5 de julio de 2026: >4 000 intentos, 30,5 h para detectar).",h:"Detección 30,5 h después; sin correlación de logs.",p:4,i:5,m:"MFA y PAM para administradores, bloqueo de cuentas, alertas en tiempo real y SOC 24/7.",j:"Un dominio comprometido da control de SAP, M365 y respaldos a la vez.",c:{c2:[1,0],c3:[1,0],c4:[0,2],c5:[0,1]}},
+{pl:"Monitoreo",e:"Ataque durante noches y fines de semana, incluido el pico del sábado, sin monitoreo humano.",h:"CyberShield cubre 8×5 (27 % de la semana); 73 % sin vigilancia.",p:4,i:4,m:"Pasar a SOC 24/7 (USD 11 000/mes) o servicio híbrido con guardia para eventos críticos.",j:"+USD 78 000/año equivale a ~52 minutos de ventas pico de sábado (USD 1 500/min).",c:{c4:[2,1],c5:[1,0]}},
+{pl:"Gobernanza",e:"Respuesta descoordinada: sin procedimiento formal ni autorización para aislar sistemas sin aprobar con Gerencia General.",h:"Sin procedimiento de respuesta a incidentes ni protocolo de aislamiento.",p:4,i:4,m:"Plan de respuesta a incidentes, árbol de decisión y autoridad delegada al CISO/TI para contener 24/7.",j:"Cada hora de espera amplía el daño; el costo es principalmente de gestión.",c:{c5:[1,2],c4:[0,1]}},
+{pl:"SAP ERP",e:"Restauración fallida o muy lenta de SAP (SQL Server sobre vSphere) por RTO/RPO sin aprobar y sin pruebas integrales.",h:"Sin RTO/RPO formales ni pruebas simultáneas recientes.",p:3,i:5,m:"Aprobar RTO/RPO por plataforma y ejecutar pruebas de restauración integral semestrales.",j:"Convierte una expectativa en un compromiso medible y revela fallas antes del incidente.",c:{c7:[1,2],c1:[0,1]}},
+{pl:"Identidad compartida",e:"Movimiento lateral desde AD hacia Entra ID (sincronización) y hacia vCenter/ESXi.",h:"AD sincronizado con Entra ID; privilegios amplios de terceros.",p:3,i:5,m:"Segmentación de administración, cuentas separadas para Entra ID, endurecimiento de vSphere y Tier-0.",j:"Evita que un solo compromiso se propague a nube y virtualización.",c:{c3:[1,0],c2:[1,0],c4:[0,1]}},
+{pl:"Continuidad POS",e:"Pérdida de integridad o conciliación entre los POS locales (sincronización cada 15 min) y SAP caído durante el pico.",h:"Sincronización de 15 min; sin plan de contingencia integral.",p:3,i:4,m:"Procedimientos de operación offline, conciliación posterior y pruebas de caída de SAP en sucursales.",j:"15 min de transacciones en pico ≈ USD 22 500 en riesgo de conciliación.",c:{c7:[0,1],c5:[0,1]}},
+{pl:"Microsoft 365",e:"Exfiltración de datos desde Exchange Online o SAP (proveedores, nómina, clientes).",h:"Sin SIEM ni correlación de logs; MFA parcial.",p:3,i:4,m:"Auditoría de buzones, DLP, alertas de reenvío externo y logs de M365/SAP en el SIEM.",j:"Reduce exposición legal y reputacional por filtración de datos.",c:{c2:[1,0],c4:[0,1],c5:[0,1]}},
+{pl:"Microsoft 365",e:"Caída de M365 que paraliza aprobaciones y coordinación administrativa.",h:"Sin canales alternos formales.",p:3,i:3,m:"Canal alterno (telefonía, mensajería aprobada), matriz de aprobaciones de emergencia y lista de contactos offline.",j:"Inversión baja; mantiene decisiones críticas durante la caída.",c:{c6:[0,2]}},
+{pl:"Gobernanza",e:"Pérdida de evidencia digital y dificultad para acciones legales o reportes regulatorios.",h:"Sin procedimientos de preservación de evidencia.",p:3,i:3,m:"Procedimiento forense, cadena de custodia, retención de logs y acuerdo con perito externo.",j:"Protege el caso legal y la posible reclamación al seguro.",c:{c5:[0,1],c4:[0,1]}}];
+const st={on:{},sel:null};
+const lv=s=>s>=16?["Crítico","var(--r)"]:s>=10?["Alto","var(--o)"]:s>=5?["Medio","var(--y)"]:["Bajo","var(--g)"];
+const cl=x=>Math.max(1,Math.min(5,x));
+function eff(r){let p=r.p,i=r.i;for(const k in r.c)if(st.on[k]){p-=r.c[k][0];i-=r.c[k][1]}return[cl(p),cl(i)]}
+function data(){return R.map((r,x)=>{const[p,i]=eff(r);return{x,r,p,i,s:p*i,s0:r.p*r.i}}).sort((a,b)=>b.s-a.s||b.s0-a.s0)}
+function render(){
+const d=data(),tot=d.reduce((a,b)=>a+b.s,0),tot0=d.reduce((a,b)=>a+b.s0,0);
+const crit=d.filter(z=>z.s>=16).length,crit0=d.filter(z=>z.s0>=16).length;
+kp.innerHTML=`<div><b>${R.length}</b><span>Riesgos identificados</span></div><div><b style="color:var(--r)">${crit}</b><span>Críticos (inherentes: ${crit0})</span></div><div><b>${tot}</b><span>Puntaje total (inherente: ${tot0})</span></div><div><b>${Math.round((1-tot/tot0)*100)}%</b><span>Reducción de riesgo</span></div>`;
+let h="";for(let p=5;p>=1;p--){h+=`<div class="ax">${p}</div>`;for(let i=1;i<=5;i++){const n=d.filter(z=>z.p==p&&z.i==i).length,c=lv(p*i)[1],s=st.sel&&st.sel[0]==p&&st.sel[1]==i;h+=`<div class="cell${s?" sel":""}" style="background:${c};opacity:${n?1:.45}" onclick="pick(${p},${i})" title="P${p} × I${i} = ${p*i}">${n||""}</div>`}}
+h+=`<div class="ax"></div>`+[1,2,3,4,5].map(i=>`<div class="ax">${i}</div>`).join("");
+hm.innerHTML=h+`<div></div><div class="ax" style="grid-column:2/-1">Impacto → (Y: Probabilidad ↑)</div>`;
+fl.textContent=st.sel?`Filtro: P${st.sel[0]} × I${st.sel[1]} (clic de nuevo para quitar).`:"Haz clic en una celda para filtrar el inventario.";
+const fs=d.map((z,n)=>({...z,n:n+1})).filter(z=>!st.sel||(z.p==st.sel[0]&&z.i==st.sel[1]));
+ls.innerHTML=fs.map(z=>{const[t,c]=lv(z.s),[t0]=lv(z.s0),r=z.r;return`<div class="card risk" style="border-left-color:${c}"><div class="rh"><span class="n">#${z.n}</span><span class="tag">${r.pl}</span><span class="tag">Inherente ${z.s0} (${t0})</span><span class="bd" style="background:${c}">${z.s} · ${t}</span></div>
+<b>${r.e}</b>
+<div class="sl"><label>Probabilidad <input type="range" min="1" max="5" value="${r.p}" oninput="this.nextElementSibling.textContent=this.value" onchange="setv(${z.x},'p',this.value)"><b>${r.p}</b></label><label>Impacto <input type="range" min="1" max="5" value="${r.i}" oninput="this.nextElementSibling.textContent=this.value" onchange="setv(${z.x},'i',this.value)"><b>${r.i}</b></label><span class="ft">Residual: P${z.p} × I${z.i}</span></div>
+<div class="gr"><div><h4>Hallazgo de auditoría</h4>${r.h}</div><div><h4>Plan de mitigación</h4>${r.m}</div><div><h4>Justificación financiera/operativa</h4>${r.j}</div></div></div>`}).join("")||`<p class="ft">Sin riesgos en esta celda.</p>`;
+const n=C.filter(c=>st.on[c.k]).length;
+cs.textContent=st.on.c4?"SOC 24/7 activo: costo incremental de USD 78 000/año. Los demás costos deben cotizarse.":"Activa controles para ver el efecto en el mapa y el inventario.";}
+function pick(p,i){st.sel=st.sel&&st.sel[0]==p&&st.sel[1]==i?null:[p,i];render()}
+function setv(x,k,v){R[x][k]=+v;render()}
+function tog(k,v){st.on[k]=v;render()}
+function reset(){st.on={};st.sel=null;R.forEach((r,x)=>{r.p=r.p0;r.i=r.i0});drawc();render()}
+R.forEach(r=>{r.p0=r.p;r.i0=r.i});
+function drawc(){ct.innerHTML=C.map(c=>`<label class="ctl"><input type="checkbox" ${st.on[c.k]?"checked":""} onchange="tog('${c.k}',this.checked)"><span><b>${c.n}</b><small>${c.d}</small></span></label>`).join("")}
+drawc();render();
+</script></body></html>
